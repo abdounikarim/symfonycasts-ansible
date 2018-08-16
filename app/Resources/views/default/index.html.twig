@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="video-content-container">
+        <div class="filter-container">
+            <h3 class="filter-header">Filter by Tag</h3>
+            <hr>
+            {% if tags %}
+                <ul class="filter-list unstyled-list">
+                    {% for index, tag in tags %}
+                        <li>
+                            <input type="checkbox" id="tag-{{ index }}" class="check-box">
+                            <label for="tag-{{ index }}"><span>{{ tag }}</span></label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="well">
+                    No tags
+                </div>
+            {% endif %}
+        </div>
+        <div class="video-box">
+            <div class="video-box-header">
+                <h3>Over {{ totalVideoUploadsCount|number_format }} Bovine Fitness Routines</h3>
+                <div>Over {{ totalVideoViewsCount|number_format }} Total Video Views</div>
+            </div>
+            {% if tags %}
+                {% for video in videos %}
+                    <a href="#video-{{ video.id }}">
+                        <div class="video-container">
+                            <img class="video-image" src="{{ asset(video.image) }}">
+                            <div class="video-title">
+                                <i class="fa fa-play-circle-o"></i>
+                                {{ video.title }}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+                <a href="#more">
+                    <div class="video-container">
+                        <img class="video-image" src="{{ asset('images/more.png') }}"/>
+                    </div>
+                </a>
+            {% else %}
+                <div class="well">
+                    Oh moo... no videos!
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
