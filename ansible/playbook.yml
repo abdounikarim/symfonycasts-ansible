@@ -14,13 +14,37 @@
       apt:
         upgrade: safe
 
+    - name: Install cowsay - it's probably important
+      apt:
+        name: cowsay
+      become: true
+
     - name: Install Git VCS
       become: true
       apt:
         name: git
         state: latest
 
-    - name: Install cowsay - it's probably important
-      apt:
-        name: cowsay
+    - name: Install Nginx web server
       become: true
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Install MySQL DB server
+      become: true
+      apt:
+        name: mysql-server
+        state: latest
+
+    - name: Add PHP 7 PPA repository
+      become: true
+      apt_repository:
+        repo: 'ppa:ondrej/php'
+
+    - name: Install PHP CLI
+      become: true
+      apt:
+        name: php7.2-cli
+        state: latest
+
